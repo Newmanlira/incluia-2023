@@ -1,12 +1,53 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { Navigation } from "@/components/Navigation";
+import { HeroSection } from "@/components/HeroSection";
+import { FunnelSection } from "@/components/FunnelSection";
+import { MethodologySection } from "@/components/MethodologySection";
+import { RankingSection } from "@/components/RankingSection";
+import { AIClusterSection } from "@/components/AIClusterSection";
+import { EconomicSection } from "@/components/EconomicSection";
+import { ICISection } from "@/components/ICISection";
+import { FooterSection } from "@/components/FooterSection";
 
 const Index = () => {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
+    <div className="min-h-screen bg-background">
+      <Navigation />
+      
+      <main>
+        <section id="hero">
+          <HeroSection />
+        </section>
+        
+        <div className="section-divider" />
+        
+        <section id="funnel">
+          <FunnelSection />
+        </section>
+        
+        <section id="methodology">
+          <MethodologySection />
+        </section>
+        
+        <div className="section-divider" />
+        
+        <section id="ranking">
+          <RankingSection />
+        </section>
+        
+        <section id="ai">
+          <AIClusterSection />
+        </section>
+        
+        <section id="economic">
+          <EconomicSection />
+        </section>
+        
+        <section id="ici">
+          <ICISection />
+        </section>
+      </main>
+      
+      <FooterSection />
     </div>
   );
 };
