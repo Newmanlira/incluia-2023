@@ -28,7 +28,7 @@ export const FunnelSection = () => {
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
             A mecânica da <span className="text-destructive font-semibold">"Expulsão Branca"</span>: 
-            onde a complexidade acadêmica aumenta enquanto o suporte estatal mingua.
+            o fenômeno onde a complexidade acadêmica aumenta enquanto o suporte estatal sofre um **apagão deliberado**.
           </p>
         </motion.div>
 
@@ -81,18 +81,17 @@ export const FunnelSection = () => {
               </div>
               <div>
                 <h3 className="text-xl font-bold text-foreground mb-2">
-                  Dado Alarmante: Queda no Suporte
+                  Diagnóstico Crítico: A Ruptura do Suporte
                 </h3>
                 <p className="text-muted-foreground mb-4">
-                  A redução no suporte de monitores entre o Ensino Fundamental e o Ensino Médio atinge:
+                  A auditoria identificou que a transição para o Ensino Médio não é apenas pedagógica, é um **deserto de assistência**. A queda na presença de monitores atinge:
                 </p>
                 <div className="flex items-baseline gap-2">
                   <span className="text-5xl font-black stat-critical">-98,60%</span>
-                  <span className="text-muted-foreground">de profissionais monitores</span>
+                  <span className="text-muted-foreground">de suporte humano</span>
                 </div>
                 <p className="text-sm text-muted-foreground mt-4 border-t border-border/50 pt-4">
-                  O Estado "desliga" o suporte justamente quando a complexidade acadêmica e social atinge seu ápice, 
-                  configurando uma <strong className="text-destructive">expulsão programada</strong>.
+                  <strong>O que isso significa?</strong> Para o Estado, ao completar 15 anos, o aluno neurodivergente "deixa de precisar" de auxílio. Essa retirada massiva de profissionais configura uma <strong className="text-destructive">expulsão programada</strong> mascarada de autonomia.
                 </p>
               </div>
             </div>
