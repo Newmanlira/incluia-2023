@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Map, AlertTriangle, CheckCircle2, helpCircle } from "lucide-react";
+import { Map, AlertTriangle, CheckCircle2, HelpCircle, Info } from "lucide-react";
 
 export const RegionalAuditMap = () => {
   const estados = [
@@ -16,7 +16,7 @@ export const RegionalAuditMap = () => {
       <div className="flex items-center gap-3 mb-8">
         <Map className="w-8 h-8 text-primary" />
         <div>
-          <h3 className="text-2xl font-black uppercase tracking-tighter">Geometria da Desigualdade</h3>
+          <h3 className="text-2xl font-black uppercase tracking-tighter text-white">Geometria da Desigualdade</h3>
           <p className="text-sm text-muted-foreground">Mapeamento de Clusters por Eficiência de Gestão (ICI)</p>
         </div>
       </div>
@@ -29,7 +29,7 @@ export const RegionalAuditMap = () => {
             className={`p-6 rounded-xl border-2 bg-secondary/20 ${est.status === 'Oásis' ? 'border-cyan-500/30' : 'border-red-500/30'}`}
           >
             <div className="flex justify-between items-start mb-4">
-              <span className="text-4xl font-black">{est.uf}</span>
+              <span className="text-4xl font-black text-white">{est.uf}</span>
               {est.status === 'Oásis' ? <CheckCircle2 className="text-cyan-500" /> : <AlertTriangle className="text-red-500" />}
             </div>
             
@@ -48,7 +48,7 @@ export const RegionalAuditMap = () => {
               <span className="text-[10px] uppercase font-bold opacity-60">Índice ICI</span>
             </div>
             
-            <p className="text-xs font-medium leading-relaxed italic opacity-80">
+            <p className="text-xs font-medium leading-relaxed italic opacity-80 text-muted-foreground">
               "{est.desc}"
             </p>
           </motion.div>
@@ -57,7 +57,9 @@ export const RegionalAuditMap = () => {
       
       <div className="mt-6 p-4 bg-primary/5 border border-primary/20 rounded-lg flex items-center gap-3 text-xs">
         <Info className="w-4 h-4 text-primary" />
-        <p>O <strong>Índice de Conversão Inclusiva (ICI)</strong> prova que o subsuporte não é uma fatalidade orçamentária, mas uma escolha de gestão local.</p>
+        <p className="text-muted-foreground">
+          O <strong>Índice de Conversão Inclusiva (ICI)</strong> prova que o subsuporte não é uma fatalidade orçamentária, mas uma escolha de gestão local.
+        </p>
       </div>
     </div>
   );
