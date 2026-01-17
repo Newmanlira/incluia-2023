@@ -1,9 +1,23 @@
 import React, { useState } from 'react';
 import { motion } from "framer-motion";
-import { Calculator, AlertTriangle, CheckCircle2 } from "lucide-react";
+import { Calculator, AlertTriangle, CheckCircle2, ShieldCheck, AlertCircle } from "lucide-react";
 
 export const CalculadoraRisco = () => {
   const [resultado, setResultado] = useState<number | null>(null);
+
+  const getAlertStyles = (val: number) => {
+    if (val <= 30) return 'border-green-500 bg-green-500/10 text-green-500'; // Verde
+    if (val <= 50) return 'border-yellow-400 bg-yellow-400/10 text-yellow-400'; // Amarelo Claro
+    if (val <= 70) return 'border-orange-500 bg-orange-500/10 text-orange-500'; // Laranja
+    return 'border-red-600 bg-red-600/10 text-red-600'; // Vermelho
+  };
+
+  const getStatusText = (val: number) => {
+    if (val > 70) return "NÍVEL CRÍTICO: O sistema falha gravemente em prover suporte, tornando a exclusão quase inevitável.";
+    if (val > 50) return "RISCO ACENTUADO: Barreiras estruturais e socioeconômicas tornam a permanência improvável.";
+    if (val > 30) return "ATENÇÃO: Vulnerabilidades detectadas exigem intervenção e suporte imediato.";
+    return "NÍVEL ESTÁVEL: O suporte institucional presente atua como um fator real de retenção.";
+  };
 
   const handleCalcular = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -11,7 +25,7 @@ export const CalculadoraRisco = () => {
     
     const monitor = data.get('monitor') === 'sim';
     const aee = data.get('aee') === 'sim';
-    const ciclo = data.get('ciclo'); // 'medio', 'f2' ou 'f1'
+    const ciclo = data.get('ciclo');
     const renda = data.get('renda');
     const cor = data.get('cor');
     const banheiro = data.get('banheiro') === 'sim';
@@ -19,36 +33,32 @@ export const CalculadoraRisco = () => {
 
     let risco = 0;
 
-    // 1. GATILHO CRÍTICO DO WHITE PAPER (Item 8.4)
-    // "Ausência de Monitor + Ausência de Sala AEE + Ciclo Médio"
+    // 1. GATILHO CRÍTICO (Item 8.4)
     if (!monitor && !aee && ciclo === 'medio') {
       risco = 91.2; 
     } else {
-      // 2. LÓGICA DE EMPILHAMENTO DE BARREIRAS (Item 12 e 13)
-      // Pesos baseados nas taxas de evasão do relatório
+      // 2. LÓGICA DE EMPILHAMENTO (Itens 2, 12 e 13)
       if (ciclo === 'medio') risco += 21.98;
       else if (ciclo === 'f2') risco += 14.29;
       else risco += 11.32;
 
-      // Vulnerabilidade Econômica (Item 12)
       if (renda === 'baixa') risco += 21.63;
       else if (renda === 'media') risco += 13.0;
       else risco += 5.88;
 
-      // Vulnerabilidade de Cor (Item 12)
       if (cor === 'indigena') risco += 46.67;
       else if (cor === 'preta') risco += 19.25;
       else if (cor === 'parda') risco += 18.22;
+      else if (cor === 'amarela') risco += 22.22;
       else risco += 18.43;
 
-      // Fatores de Proteção (Infraestrutura) - Reduzem o risco
+      // Fatores de Proteção
       if (monitor) risco -= 15;
       if (aee) risco -= 10;
       if (banheiro) risco -= 5;
       if (rampa) risco -= 5;
     }
 
-    // Normalizar entre 5% e 99%
     const finalScore = Math.min(Math.max(risco, 5), 99);
     setResultado(finalScore);
   };
@@ -58,11 +68,10 @@ export const CalculadoraRisco = () => {
       <div className="glass-card p-8 border-primary/30 relative overflow-hidden">
         <div className="flex items-center gap-3 mb-8">
           <Calculator className="w-8 h-8 text-primary" />
-          <h2 className="text-2xl font-black">Simulador de Risco de Evasão Inclu.IA</h2>
+          <h2 className="text-2xl font-black">Simulador de Exclusão Silenciosa</h2>
         </div>
 
         <form onSubmit={handleCalcular} className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* PERFIL DO ALUNO */}
           <div className="space-y-2">
             <label className="text-sm font-bold uppercase tracking-tighter">Ciclo Escolar</label>
             <select name="ciclo" className="w-full p-2 bg-secondary rounded-md border border-border">
@@ -92,7 +101,6 @@ export const CalculadoraRisco = () => {
             </select>
           </div>
 
-          {/* INFRAESTRUTURA ESCOLAR */}
           <div className="space-y-2">
             <label className="text-sm font-bold uppercase tracking-tighter">Possui Monitor/Mediador?</label>
             <select name="monitor" className="w-full p-2 bg-secondary rounded-md border border-border">
@@ -126,7 +134,7 @@ export const CalculadoraRisco = () => {
           </div>
 
           <button type="submit" className="md:col-span-2 bg-primary hover:bg-primary/90 text-primary-foreground font-black py-4 rounded-xl transition-all uppercase">
-            Simular Risco de Evasão
+            Simular Risco de Exclusão
           </button>
         </form>
 
@@ -134,19 +142,17 @@ export const CalculadoraRisco = () => {
           <motion.div 
             initial={{ opacity: 0, y: 20 }} 
             animate={{ opacity: 1, y: 0 }}
-            className={`mt-8 p-6 rounded-xl border-2 ${resultado > 60 ? 'border-destructive bg-destructive/10' : 'border-success bg-success/10'}`}
+            className={`mt-8 p-6 rounded-xl border-2 transition-colors duration-500 ${getAlertStyles(resultado)}`}
           >
             <div className="flex items-center gap-4">
-              {resultado > 60 ? <AlertTriangle className="w-12 h-12 text-destructive" /> : <CheckCircle2 className="w-12 h-12 text-success" />}
+              {resultado > 70 ? <AlertTriangle className="w-12 h-12" /> : 
+               resultado > 30 ? <AlertCircle className="w-12 h-12" /> : 
+               <ShieldCheck className="w-12 h-12" />}
               <div>
-                <p className="text-sm uppercase font-bold tracking-widest">Probabilidade de Evasão Estimada</p>
+                <p className="text-sm uppercase font-bold tracking-widest opacity-80">Probabilidade de Exclusão Silenciosa</p>
                 <p className="text-5xl font-black">{resultado.toFixed(1)}%</p>
-                <p className="text-sm mt-2 font-medium">
-                  {resultado > 70 
-                    ? "ALERTA CRÍTICO: Perfil com altíssima vulnerabilidade ao processo de 'Expulsão Branca'." 
-                    : resultado > 40
-                    ? "RISCO ALTO: A carência de suporte humano ou financeiro fragiliza a permanência."
-                    : "RISCO CONTROLADO: O suporte institucional atua como barreira contra o abandono."}
+                <p className="text-sm mt-2 font-semibold">
+                  {getStatusText(resultado)}
                 </p>
               </div>
             </div>
