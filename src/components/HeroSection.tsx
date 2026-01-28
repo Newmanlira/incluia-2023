@@ -69,7 +69,7 @@ export const HeroSection = () => {
         >
           <span className="badge-critical flex items-center gap-2">
             <AlertTriangle className="w-3 h-3" />
-            Auditoria Algorítmica 2024
+            Auditoria Algorítmica 2025
           </span>
         </motion.div>
 
