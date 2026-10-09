@@ -1,73 +1,44 @@
-# Welcome to your Lovable project
+# INCLU.IA — School Accessibility and Educational Inclusion in Brazil
 
-## Project info
+## About
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+INCLU.IA is a data analysis project examining school accessibility and educational inclusion in Brazil. This repository documents an analysis using public datasets from 2019 and 2023.
 
-## How can I edit this code?
+The accompanying White Paper, “O Código da Exclusão,” was published in December 2025.
 
-There are several ways of editing your application.
+## Research focus
 
-**Use Lovable**
+This phase explores how public indicators of school accessibility relate to educational participation and attendance, with attention to students with disabilities and other support needs.
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+## Data sources and scope
 
-Changes made via Lovable will be committed automatically to this repo.
+The project report describes processing 840,872 records across three public datasets:
 
-**Use your preferred IDE**
+- **PNAD Contínua 2023 — Brazilian Institute of Geography and Statistics (IBGE):** 366,916 respondents.
+- **National Health Survey (PNS) 2019 — IBGE:** 293,726 respondents.
+- **School Census 2023 — National Institute for Educational Studies and Research (INEP):** 180,230 schools.
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+These datasets have different years and units of analysis. The reported total is the sum of records processed across the three sources; it does not represent a single unified student-level dataset.
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+## Methods
 
-Follow these steps:
+The project report describes data preparation and analysis across the three sources, a project-defined school accessibility score, state-level comparisons, and a benchmark of 12 classification algorithms.
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+The report identifies Random Forest as the top-performing classifier in that benchmark, with an F1 score of 0.2172 for the school-attendance outcome. This figure should be interpreted in context, alongside the model’s validation design and the distribution of the outcome classes.
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+## Findings reported by the project
 
-# Step 3: Install the necessary dependencies.
-npm i
+- The project-defined accessibility score ranged from **1.53 in Amazonas** to **6.45 in the Federal District**.
+- The White Paper reports a Pearson correlation of **r = -0.5747** between state-level accessibility and attendance indicators.
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
+The reported correlation is an association at the state level. It does not establish that accessibility conditions caused changes in attendance.
 
-**Edit a file directly in GitHub**
+## Limitations
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+The analysis uses public survey and administrative data collected in different years and for different purposes. The accessibility score is a project-defined measure, not an official government index.
 
-**Use GitHub Codespaces**
+Model estimates and simulated scenarios are not observed student outcomes. They should not be interpreted as proof that a specific intervention retained students or caused a change in attendance.
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## Project development
 
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+This repository documents INCLU.IA’s analysis using the 2019 and 2023 datasets. A later phase examines the availability of support resources in municipal public-school networks using 2025 School Census data. That phase has a distinct scope and is documented separately.
